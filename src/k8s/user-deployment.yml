@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  labels:
+    app: user-service
+spec:
+  replicas: 2  # HPA can change this dynamically
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: ghcr.io/YOUR_GITHUB_USERNAME/user-microservice:latest  # Update as needed
+        ports:
+        - containerPort: 3000
+        env:
+        - name: AWS_REGION
+          value: "us-east-1"
+        - name: DYNAMODB_ENDPOINT
+          value: "http://localstack:4566"  # If using LocalStack in-cluster, else "http://localhost:4566"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /users
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /users
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 20
