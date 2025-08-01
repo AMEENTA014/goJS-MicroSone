@@ -16,14 +16,21 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: ghcr.io/YOUR_GITHUB_USERNAME/user-microservice:latest  # Update as needed
+        image: hal78/microsone:latest   # <-- Docker Hub image
         ports:
         - containerPort: 3000
         env:
+        - name: USE_POSTGRES
+          value: "false"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+                 name: user-service-db-secret
+                 key: DATABASE_URL
         - name: AWS_REGION
           value: "us-east-1"
         - name: DYNAMODB_ENDPOINT
-          value: "http://localstack:4566"  # If using LocalStack in-cluster, else "http://localhost:4566"
+          value: "http://localstack:4566"
         resources:
           requests:
             memory: "128Mi"
