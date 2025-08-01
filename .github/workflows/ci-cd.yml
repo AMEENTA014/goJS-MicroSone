@@ -32,10 +32,12 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run:  npm install
+        working-directory: ./src
 
       - name: Run tests
         run: npm test
+        working-directory: ./src
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
