@@ -60,7 +60,7 @@ jobs:
           sed -i "s|image: .*|image: hal78/microsone:latest|g" src/k8s/user-deployment.yml
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add k8s/user-deployment.yaml
+          git add src/k8s/user-deployment.yml
           git commit -m "ci: update deployment image tag [skip ci]" || echo "No change"
           git push || echo "No changes to commit"
 
