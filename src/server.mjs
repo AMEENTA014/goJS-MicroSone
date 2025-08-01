@@ -231,5 +231,3 @@ if (process.argv[1] && process.argv[1].endsWith('server.mjs')) {
       process.exit(1);
     });
 }
-console.log("o")
-console.log("");
