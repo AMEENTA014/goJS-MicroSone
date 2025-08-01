@@ -7,6 +7,6 @@ describe('User API error handling', () => {
       .post('/users')
       .send({ name: 'Test' }) // missing userId and email
       .expect(400);
-    expect(resp.body.error).toBe('Missing fields');
+    expect(resp.body.error).toBe('Missing field');
   });
 });
