@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: hal78/microsone:latest   # <-- Docker Hub image
+        image: hal78/microsone:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
