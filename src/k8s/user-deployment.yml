@@ -28,6 +28,10 @@ spec:
             secretKeyRef:
                  name: user-service-db-secret
                  key: DATABASE_URL
+        - name: AWS_ACCESS_KEY_ID
+          value: "test"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "test"
         - name: AWS_REGION
           value: "us-east-1"
         - name: DYNAMODB_ENDPOINT
